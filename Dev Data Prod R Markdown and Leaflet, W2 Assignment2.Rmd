@@ -1,0 +1,42 @@
+---
+title: 'DataProd: R Markdown and Leaflet, W2,Assignment'
+author: "Coursera_Fan"
+date: "August 5, 2017"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+**_Create a web page using R Markdown that features a map created with Leaflet_**
+
+1. Does the web page feature a date and is this date less than two months before the date that you're grading this assignment?
+```{r cars, echo=F, eval=T, comment=""}
+format(Sys.Date(), format="%B %d %Y")
+```
+
+2. Does the web page feature an interactive map that appears to have been created with Leaflet?
+
+```{r, echo=F, eval=T, comment="", warning=F}
+library("leaflet")
+leaflet() %>% addTiles() %>% 
+         addMarkers(lat=40.75, lng=-73.98,
+            popup = "Times Square, New York") 
+
+```
+
+####Zoomable map with cluster of locations
+
+```{r, echo=F, eval=T, warning=F, comment=""}
+library("leaflet")
+set.seed(2017-08-05)
+df <- data.frame(lat= runif(20, min = 38.36, max = 38.46),
+                 lng=runif(20, min = -77.4, max=-77.3))
+
+df %>% leaflet() %>% addTiles() %>% 
+       addMarkers(clusterOptions = markerClusterOptions() ) 
+
+```
